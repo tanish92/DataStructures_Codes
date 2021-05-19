@@ -1,0 +1,31 @@
+void helper(TreeNode* root, int v,int depth,int d){
+        if(root==nullptr){
+            return;
+        }
+        
+        if(depth-1==d){
+            TreeNode* t= root->left;
+            root->left=new TreeNode(v);
+            root->left->left=t;
+            t=root->right;
+            root->right=new TreeNode(v);
+            root->right->right=t;
+            
+        }
+        else{
+            helper(root->left,v,depth,d+1);
+            helper(root->right,v,depth,d+1);
+        }
+    }
+    
+    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+        if(depth==1){
+            TreeNode* t = new TreeNode(val);
+            t->left=root;
+            return t;
+        }
+        helper(root,val,depth,1);
+        
+        return root;
+        
+    }
