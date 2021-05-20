@@ -1,0 +1,37 @@
+bool helper(vector<int> &gas,vector<int> &cost,int i){
+        int n = gas.size();
+        int amount = gas[i] - cost[i] + gas[(i+1)%n] ;
+        int dst=i;
+        i=(i+1)%n;
+        
+        while(i!=dst){
+            if(amount<cost[i]){
+                return false;
+            }
+            amount = amount - cost[i] + gas[(i+1)%n];
+            i = (i+1)%n;
+            
+        }
+        
+        
+        return true;
+    }
+    
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        
+        vector<int> possible;
+        for(int i=0;i<gas.size();i++){
+            if(gas[i]>=cost[i]){
+                possible.push_back(i);
+            }
+        }
+        
+        for(int i=0;i<possible.size();i++){
+            bool t = helper(gas,cost,possible[i]);
+            
+            if(t){
+                return possible[i];
+            }
+        }
+        return -1;
+    }
