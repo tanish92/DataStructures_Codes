@@ -1,0 +1,17 @@
+ bool isPalindrome(string s)
+{
+
+    for (int a = 0, b = s.size() - 1; a < b; a++, b--)
+    {
+
+        while (!isalpha(s[a]) && !isdigit(s[a]) && a < b)
+            a++;
+
+        while (!isalpha(s[b]) && !isdigit(s[b]) && a < b)
+            b--;
+
+        if (tolower(s[a]) != tolower(s[b]))
+            return false;
+    }
+    return true;
+}
