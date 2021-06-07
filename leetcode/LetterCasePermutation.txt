@@ -1,0 +1,23 @@
+void permutations(vector<string> &ans,string &S,int index){
+        if(index==S.size()){
+            ans.push_back(S);
+            return;
+        }
+        if(isalpha(S[index])){
+            S[index]=tolower(S[index]);
+            permutations(ans,S,index+1);
+            S[index]=toupper(S[index]);
+            permutations(ans,S,index+1);
+        }
+        else{
+            permutations(ans,S,index+1);
+        }
+    }
+    
+    vector<string> letterCasePermutation(string S) {
+        int n=S.length();
+        vector<string> ans;
+        permutations(ans,S,0);
+        return ans;
+        
+    }
